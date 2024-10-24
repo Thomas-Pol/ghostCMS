@@ -1,0 +1,7 @@
+node_modules/
+
+content/themes/casper/
+
+content/themes/source/
+
+*.logs
