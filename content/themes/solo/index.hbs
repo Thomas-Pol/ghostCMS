@@ -1,0 +1,115 @@
+{{!< default}}
+
+<section id="sticky-parallax-header" class="gh-about gh-outer{{#match @custom.header_section_layout "!=" "Typographic profile"}}{{#unless @site.cover_image}} no-image{{/unless}}{{else}}{{#unless @site.icon}} no-image{{/unless}}{{/match}}">
+    <div class="gh-about-inner gh-inner">
+        {{#match @custom.header_section_layout "!=" "Typographic profile"}}
+            {{#if @site.cover_image}}
+                <img class="gh-about-image" src="{{@site.cover_image}}" alt="{{@site.title}}">
+            {{/if}}
+        {{else}}
+            {{#if @site.icon}}
+                <img class="gh-about-image" src="{{@site.icon}}" alt="{{@site.title}}">
+            {{/if}}
+        {{/match}}
+        <script>
+            (function () {
+                if (!document.body.classList.contains('has-background-about')) return;
+
+                const about = document.querySelector('.gh-about');
+                if (!about) return;
+
+                const image = about.querySelector('.gh-about-image');
+
+                about.style.setProperty('--about-height', image.clientWidth * image.naturalHeight / image.naturalWidth + 'vh');
+                about.classList.add('initialized');
+
+            })();
+
+            // Some elements we'll need
+            const $header = document.querySelector("#sticky-parallax-header");
+
+            // Fixate the header
+            $header.style.position = 'fixed';
+            $header.style.width = '100vw';
+            $header.style.top = 0;
+            $header.style.zIndex = '2';
+
+            // Offset content
+            document.body.style.paddingTop = '100vh';
+
+            $header.animate({
+                backgroundPosition: ["50% 0", "50% 100%"],
+                backgroundColor: ['transparent', '#0b1584'],
+                height: ['100vh', '10vh'],
+                fontSize: ['calc(4vw + 1em)', 'calc(1vw + 1em)'],
+            },
+            {
+                fill: "both",
+                timeline: new ScrollTimeline({
+                    source: document.documentElement,
+                }),
+                rangeStart: '0',
+                rangeEnd: '90vh',
+            });
+
+        </script>
+        <div class="gh-about-content">
+            <div class="gh-about-content-inner">
+                {{#if @custom.primary_header}}
+                    <h1 class="gh-about-primary">{{{@custom.primary_header}}}</h1>
+                {{/if}}
+                {{#if @custom.secondary_header}}
+                    <p class="gh-about-secondary">{{{@custom.secondary_header}}}</p>
+                {{/if}}
+                
+            </div>
+        </div>
+    </div>
+    <script>
+            // Get the height and range for the scroll timeline
+            //const rangeStart = 0;  // Equivalent to '0' from your ScrollTimeline
+            //const rangeEnd = window.innerHeight * 0.9; // Equivalent to '90vh'
+            //const halfwayPoint = (rangeEnd - rangeStart) / 2; // Calculate halfway point in pixels
+
+            const ghAboutPrimary = document.querySelector('.gh-about-primary');
+            const ghAboutSecondary = document.querySelector('.gh-about-secondary');
+
+            // Track scroll event
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.scrollY; // Get current scroll position
+
+                const ghAboutPrimaryPosition = ghAboutPrimary.getBoundingClientRect();
+
+                const headerPosition = $header.getBoundingClientRect();
+                
+               
+                if(ghAboutPrimaryPosition.top >= headerPosition.bottom) {
+                    ghAboutPrimary.style.opacity = 0;
+                    ghAboutSecondary.style.opacity = 0;
+                } else if(ghAboutPrimaryPosition.top <= headerPosition.bottom) {
+                    ghAboutPrimary.style.opacity = 100;
+                    ghAboutSecondary.style.opacity = 100;
+                }
+
+            });
+        </script>
+</section>
+
+<main class="gh-main gh-outer">
+    <div id="test" class="gh-feed gh-inner">
+        <h1 class="project-text">Newest Projects</h1>
+        {{#foreach posts}}
+            {{#match @index 0}}
+                {{> "loop"}}    
+            {{/match}}
+            {{#match @index 1}}
+                {{> "loop"}}    
+            {{/match}}
+            {{#match @index 2}}
+                {{> "loop"}}    
+            {{/match}}
+        {{/foreach}}
+    </div>
+</main>
+
+{{#contentFor "body_class"}}{{#match @custom.header_section_layout "Side by side"}} has-side-about{{/match}}{{#match @custom.header_section_layout "Large background"}}{{#if @site.cover_image}} is-head-transparent has-background-about{{else}} has-side-about{{/if}}{{/match}}{{#match @custom.header_section_layout "Typographic profile"}}{{#if @site.icon}} has-typographic-about{{else}} has-side-about{{/if}}{{/match}}{{/contentFor}}
