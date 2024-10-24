@@ -1,7 +1,7 @@
 node_modules/
 
-content/themes/casper/
+content/themes/casper
 
-content/themes/source/
+content/themes/source
 
 *.logs
