@@ -55,7 +55,8 @@
 }
 
 body {
-    background-color: var(--background-color);
+    /* background-color: var(--background-color); */
+    background-color: #C0CED1;
 }
 
 .gh-main {
@@ -1004,7 +1005,7 @@ hr {
     filter: brightness(0.6);
 }
 
-.post-template #gh-head, .page-template #gh-head { 
+.post-template #gh-head, .page-template #gh-head, .author-template #gh-head { 
     padding: 0;
     left: 0;
     right: 0;
@@ -1012,7 +1013,7 @@ hr {
     padding-right: var(--gap);
 }
 
-.post-template .gh-image-about, .page-template .gh-image-about {
+.post-template .gh-image-about, .page-template .gh-image-about, .author-template .gh-image-about {
     position: fixed;
     display: block;
     height: 10vh;
@@ -1023,20 +1024,21 @@ hr {
     z-index: -1;
 }
 
-.post-template .gh-head-brand button, .page-template .gh-head-brand button::before {
+.post-template .gh-head-brand button, .page-template .gh-head-brand button::before, .author-template .gh-head-brand button::before {
     background-color: white;
 }
-.post-template .gh-head-brand button, .page-template .gh-head-brand button::after {
+.post-template .gh-head-brand button, .page-template .gh-head-brand button::after, .author-template .gh-head-brand button::after {
     background-color: white;
 }
 
-.post-template .gh-head-logo, .page-template .gh-head-logo {
+.post-template .gh-head-logo, .page-template .gh-head-logo, .author-template .gh-head-logo {
     color: white;
 }
 
-.post-template .gh-head-menu a, .page-template .gh-head-menu a {
+.post-template .gh-head-menu a, .page-template .gh-head-menu a, .author-template .gh-head-menu a {
     color: white;   
 }
+
 
 
 @media (max-width: 767px) {
@@ -1049,5 +1051,4 @@ hr {
     .is-head-open #gh-head .gh-head-brand {
         height: 10vh;
     } 
-}
-
+}   

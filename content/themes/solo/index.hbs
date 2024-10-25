@@ -79,15 +79,19 @@
                 const scrollPosition = window.scrollY; // Get current scroll position
 
                 const ghAboutPrimaryPosition = ghAboutPrimary.getBoundingClientRect();
+                const ghAboutSecondaryPosition = ghAboutSecondary.getBoundingClientRect();
 
                 const headerPosition = $header.getBoundingClientRect();
                 
                
-                if(ghAboutPrimaryPosition.top >= headerPosition.bottom) {
+                if(ghAboutPrimaryPosition.bottom >= headerPosition.bottom) {
                     ghAboutPrimary.style.opacity = 0;
-                    ghAboutSecondary.style.opacity = 0;
-                } else if(ghAboutPrimaryPosition.top <= headerPosition.bottom) {
+                } else if(ghAboutPrimaryPosition.bottom <= headerPosition.bottom) {
                     ghAboutPrimary.style.opacity = 100;
+                }
+                if(ghAboutSecondaryPosition.bottom >= headerPosition.bottom) {
+                    ghAboutSecondary.style.opacity = 0;
+                } else if(ghAboutSecondaryPosition.bottom <= headerPosition.bottom) {
                     ghAboutSecondary.style.opacity = 100;
                 }
 
